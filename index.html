@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro e Inicio de Sesión</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background-image: url(INTRO876.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            flex-direction: column;
+        }
+        .contenedor {
+            width: 300px;
+            padding: 20px;
+            background-image: url(fondo\ 45tt.jpg);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 35px;
+            margin-bottom: 5px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .grupo-formulario {
+            margin-bottom: 15px;
+        }
+        .grupo-formulario label {
+            display: block;
+            margin-bottom: 3px;
+        }
+        .grupo-formulario input {
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            padding: 17px 11px;
+            border: 1px solid #1f2020;
+            border-radius: 15px;
+            margin-bottom: 5px;
+            background-color: rgb(213, 219, 224);
+            outline: none;
+            color: rgb(37, 35, 35);
+            font-size: 5px;
+        }
+        .grupo-formulario button {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            padding: 17px 11px;
+            border-radius: 15px;
+            margin-bottom: 5px;
+            border: 1px solid #131312;
+            background-color: #1a8be7;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .grupo-formulario button:hover {
+            background-color: #e016e0;
+        }
+        .mensaje {
+            text-align: center;
+            margin-top: 10px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor" id="contenedorRegistro">
+        <h2>Registro</h2>
+        <form id="formularioRegistro">
+            <div class="grupo-formulario">
+                <label for="correoRegistro">Correo Electrónico</label>
+                <input type="email" id="correoRegistro" name="correo" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="contrasenaRegistro">Contraseña</label>
+                <input type="password" id="contrasenaRegistro" name="contrasena" required>
+            </div>
+            <div class="grupo-formulario">
+                <button type="submit">REGISTRARSE</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="contenedor" id="contenedorInicioSesion">
+        <h2>Inicio de Sesión</h2>
+        <form id="formularioInicioSesion">
+            <div class="grupo-formulario">
+                <label for="correoInicioSesion">Correo Electrónico</label>
+                <input type="email" id="correoInicioSesion" name="correo" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="contrasenaInicioSesion">Contraseña</label>
+                <input type="password" id="contrasenaInicioSesion" name="contrasena" required>
+            </div>
+            <div class="grupo-formulario">
+                <button type="submit">INICIAR SESION</button>
+            </div>
+        </form>
+        <div class="mensaje" id="mensajeInicioSesion"></div>
+    </div>
+
+    <script>
+        document.getElementById('formularioRegistro').addEventListener('submit', function(evento) {
+            evento.preventDefault();
+            const correo = document.getElementById('correoRegistro').value;
+            const contrasena = document.getElementById('contrasenaRegistro').value;
+
+            // Guardar los datos en localStorage
+            localStorage.setItem('correo', correo);
+            localStorage.setItem('contrasena', contrasena);
+
+            alert('Registro exitoso. Ahora puede iniciar sesión.');
+            document.getElementById('formularioRegistro').reset();
+        });
+
+        document.getElementById('formularioInicioSesion').addEventListener('submit', function(evento) {
+            evento.preventDefault();
+            const correo = document.getElementById('correoInicioSesion').value;
+            const contrasena = document.getElementById('contrasenaInicioSesion').value;
+
+            const correoGuardado = localStorage.getItem('correo');
+            const contrasenaGuardada = localStorage.getItem('contrasena');
+
+            if (correo === correoGuardado && contrasena === contrasenaGuardada) {
+                window.location.href = 'https://cheftiburon.my.canva.site/'; // Cambia esto por la URL deseada
+            } else {
+                const mensajeInicioSesion = document.getElementById('mensajeInicioSesion');
+                mensajeInicioSesion.textContent = 'Correo electrónico o contraseña incorrectos.';
+                mensajeInicioSesion.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
